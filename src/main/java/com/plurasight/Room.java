@@ -24,9 +24,11 @@ public class Room {
             this.isDirty = true;
         }
     }
-    public void checkOut(){
-        isDirty = true;
-        isOccupied = false;
+    public void checkOut() {
+        if (isOccupied) {
+            isDirty = true;
+            isOccupied = false;
+        }
     }
 
     public void cleanRoom() {
