@@ -4,9 +4,9 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Employee {
-    final String employeeId;
-    final String name;
-    final String department;
+    private final String employeeId;
+    private final String name;
+    private final String department;
     private final double payRate;
 
     private double hoursWorked;
