@@ -1,75 +1,42 @@
 package com.plurasight;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.EnumMap;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EmployeeTest {
 
-
     @Test
-    void punchIn() {
-        //Arrange
-        Employee suliman = new Employee("Suliman");
+    void punchOutAddsBothShifts() {
+        Employee employee = new Employee("Suliman");
 
-        //Act
-        suliman.punchIn(12);
+        employee.punchIn(8);
+        employee.punchOut(12); // 4 hours
 
-        //Assert
-        Assertions.assertEquals(12,suliman.startTime);
+        employee.punchIn(9);
+        employee.punchOut(14); // 5 more hours
 
-    }
-
-    @Test
-    void punchOut() {
-        //Arrange
-        Employee dave = new Employee("Dave");
-        dave.startTime = 8;
-
-        //Act
-        dave.punchOut(20);
-
-        //Assert
-        Assertions.assertEquals(12,dave.hoursWorked);
+        assertEquals(9.0, employee.getRegularHours(), 0.001);
     }
 
     @Test
     void getTotalPay() {
-        //Arrange
-        Employee tai = new Employee("Tai");
-        tai.hoursWorked = 12;
+        Employee tai = new Employee("1", "Tai", "Front Desk", 16.00, 12);
 
-        //Act
-        double totalPay = tai.getTotalPay();
-
-        //Assert
-        assertEquals(192,totalPay);
-
-
+        assertEquals(192.0, tai.getTotalPay(), 0.001);
     }
 
     @Test
     void getRegularHours() {
-        Employee suli = new Employee("Suli");
-        suli.hoursWorked = 40;
+        Employee suli = new Employee("2", "Suli", "Front Desk", 16.00, 50);
 
-        int expected = suli.getRegularHours();
-
-        assertEquals(40,expected);
-
-
+        assertEquals(40.0, suli.getRegularHours(), 0.001);
     }
 
     @Test
     void getOvertimeHours() {
-        Employee suli = new Employee("Suli");
-        suli.hoursWorked = 50;
+        Employee suli = new Employee("2", "Suli", "Front Desk", 16.00, 50);
 
-        int expected = suli.getOvertimeHours();
-
-        assertEquals(10,expected);
+        assertEquals(10.0, suli.getOvertimeHours(), 0.001);
     }
 }

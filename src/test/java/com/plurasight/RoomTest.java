@@ -1,5 +1,6 @@
 package com.plurasight;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -48,13 +49,10 @@ class RoomTest {
     @Test
     void getNumbersOfBeds() {
         //Arrange
-        Room room1 = new Room();
-
-        //Act
-        room1.getNumbersOfBeds(3);
+        Room room1 = new Room(2, 124.00, false, false);
 
         //assert
-        assertEquals(3,room1.numbersOfBeds);
+        assertEquals(2, room1.getNumberOfBeds());
     }
 
     @Test
@@ -62,51 +60,39 @@ class RoomTest {
         //Arrange
         Room room1 = new Room();
 
-        //Act
-        room1.isOccupied();
-
         //assert
-        assertEquals(true,room1.isOccupied);
+        Assertions.assertEquals(false,room1.isOccupied());
     }
 
     @Test
     void isDirty() {
         //Arrange
         Room room1 = new Room();
-        room1.isOccupied = true;
 
         //Act
-        room1.isDirty();
+        room1.checkIn();
 
         //assert
-        assertEquals(true,room1.isDirty);
+        assertEquals(true,room1.isDirty());
     }
 
     @Test
     void isAvailable() {
         //Arrange
         Room room1 = new Room();
-        room1.isDirty = false;
-        room1.isOccupied = false;
-
-        //Act
-        room1.isAvailable();
 
         //assert
-        assertEquals(true,room1.isAvailable);
+        Assertions.assertEquals(true,room1.isAvailable());
     }
 
     @Test
     void getPrice() {
 
         //Arrange
-        Room room1 = new Room();
+        Room room1 = new Room(2, 124.00, false, false);
 
-
-        //Act
-        room1.getPrice("king");
 
         //assert
-        assertEquals(139,room1.price);
+        assertEquals(124.00, room1.getPrice(), 0.001);
     }
 }

@@ -4,57 +4,59 @@ public class Room {
     int numbersOfBeds;
     boolean isOccupied;
     boolean isDirty;
-    boolean isAvailable;
     double price;
 
-//    public Room(int numbersOfBeds,boolean isOccupied, boolean isDirty,boolean isAvailable){
-//        this.numbersOfBeds = numbersOfBeds;
-//        this.isAvailable = isAvailable;
-//        this.isOccupied = isOccupied;
-//        this.isDirty = isDirty;
-//    }
+
+    public Room() {
+        this(1, 139.00, false, false);
+    }
+
+    public Room(int numbersOfBeds, double price, boolean isOccupied, boolean isDirty) {
+        this.numbersOfBeds = numbersOfBeds;
+        this.price = price;
+        this.isOccupied = isOccupied;
+        this.isDirty = isDirty;
+    }
 
     public void checkIn(){
-        this.isOccupied = true;
-        this.isDirty = true;
+        if (isAvailable()) {
+            this.isOccupied = true;
+            this.isDirty = true;
+        }
     }
     public void checkOut(){
         isDirty = true;
         isOccupied = false;
     }
 
-    public void cleanRoom(){
-        isDirty = false;
-        isOccupied = false;
+    public void cleanRoom() {
+        if (!isOccupied) {
+            isDirty = false;
+        }
     }
 
 
-    public int getNumbersOfBeds(int number) {
-        this.numbersOfBeds = number;
+    public int getNumberOfBeds() {
         return numbersOfBeds;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
     public boolean isOccupied() {
-        if (!isAvailable) isOccupied = true;
-        if (isAvailable)  isOccupied = false;
         return isOccupied;
     }
 
     public boolean isDirty() {
-        if(isOccupied) isDirty = true;
         return isDirty;
     }
 
     public boolean isAvailable() {
-        if(!isDirty && !isOccupied) isAvailable = true;
-        return isAvailable;
+        return !isOccupied && !isDirty;
     }
 
-    public double getPrice(String roomType) {
-        if(roomType.equals("king")) price = 139.00;
-        if (roomType.equals("double")) price = 124.00;
-        return price;
-    }
+
 
 
 }
